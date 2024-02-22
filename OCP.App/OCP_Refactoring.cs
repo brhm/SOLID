@@ -32,6 +32,14 @@ namespace OCP.App.Good
             return salary * 6;
         }
     }
+    // we only extended the codes and didn't change anything on exist codes.
+    public class ManagerSalaryCalculate : ISalaryCalculate
+    {
+        public decimal Calculate(decimal salary)
+        {
+            return salary * 8;
+        }
+    }
 
     public class SalaryCalculate
     {

@@ -19,6 +19,7 @@ good.SalaryCalculate calculateGood = new good.SalaryCalculate();
 Console.WriteLine($"Low Salary:{calculateGood.Calculate(100, new good.LowSalaryCalculate())}");
 Console.WriteLine($"Middle Salary:{calculateGood.Calculate(100, new good.MiddleSalaryCalculate())}");
 Console.WriteLine($"High Salary:{calculateGood.Calculate(100, new good.HighSalaryCalculate())}");
+Console.WriteLine($"Manager Salary:{calculateGood.Calculate(100, new good.ManagerSalaryCalculate())}");
 
 
 Console.ReadLine();
