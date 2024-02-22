@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace OCP.App.Good
 {
+    // 1. solution with interface.
     public interface ISalaryCalculate
     {
         decimal Calculate(decimal salary);
