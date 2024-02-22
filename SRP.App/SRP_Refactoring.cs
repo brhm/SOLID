@@ -4,16 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SRP.App.Bad
+namespace SRP.App.Good
 {
     public class Product
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
+    }
+    public class ProdcutRepository
+    {
         private static List<Product> ProductList = new List<Product>();
-        public static List<Product> GetProducts=> ProductList; // get property =>  GetProducts{ get{return ProductList;}}
-        public Product()
+        public static List<Product> GetProducts => ProductList; // get property =>  GetProducts{ get{return ProductList;}}
+        public ProdcutRepository()
         {
             ProductList = new()
             {
@@ -27,40 +30,44 @@ namespace SRP.App.Bad
         }
         public void SaveOrUpdate(Product product)
         {
-            var hasProduct= ProductList.Any(p=>p.Id==product.Id);
+            var hasProduct = ProductList.Any(p => p.Id == product.Id);
 
-            if(!hasProduct)
+            if (!hasProduct)
             {
                 ProductList.Add(product);
             }
             else
             {
-                var index= ProductList.FindIndex(p=>p.Id==product.Id);
+                var index = ProductList.FindIndex(p => p.Id == product.Id);
 
                 ProductList[index] = product;
             }
         }
-        public void Detele(int  id)
+        public void Delete(int id)
         {
-            var hasProduct=ProductList.Find(p=>p.Id==id);
+            var hasProduct = ProductList.Find(p => p.Id == id);
 
-            if(hasProduct==null) {
+            if (hasProduct == null)
+            {
 
                 throw new Exception($"{id} idli Ürün Bulunamadı");
 
             }
 
-                ProductList.Remove(hasProduct);
+            ProductList.Remove(hasProduct);
         }
-        public void WriteToConsole()
+
+    }
+    public class ProductPresenter
+    {
+        public void WriteToConsole(List<Product> productList)
         {
-            ProductList.ForEach(p =>
+            productList.ForEach(p =>
             {
                 Console.WriteLine($"{p.Id} - {p.Name}");
             });
             Console.ReadLine();
         }
-
     }
 
 }
