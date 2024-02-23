@@ -5,17 +5,14 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DIP.App.Bad
+namespace DIP.App.Good
 {
     public class ProductService
     {
-
-        // High-level class (service) dependent on the low-level class.
-        // The high-level class (service) has a high coupling with the low-level class.
-
-        // *** If I want to change the data repository. I have to change those codes.
-        private readonly ProductRepositoryFromSQLServer _repository;
-        public ProductService(ProductRepositoryFromSQLServer repository)
+        // The high-level class (service) has a loose coupling with the low-level class.
+        // If we want to change the data repository. we don't touch here. We only need to change where the service call
+        private readonly IRepository _repository;
+        public ProductService(IRepository repository)
         {
                 _repository = repository;
         }
@@ -25,19 +22,22 @@ namespace DIP.App.Bad
         }
     }
 
-    public class ProductRepositoryFromSQLServer
+    public class ProductRepositoryFromSQLServer:IRepository
     {
         public List<string> GetAll()
         {
             return new List<string> { "SQL Server Kalem", "SQL Server Defter", "SQL Server Kitap" };
         }
     }
-    // when I want to change the data repository, I have to change the service and where the service call.(Program cs)
-    public class ProductRepositoryFromOracle
+    public class ProductRepositoryFromOracle : IRepository
     {
         public List<string> GetAll()
         {
             return new List<string> { "Oracle Kalem", "Oracle Defter", "Oracle Kitap" };
         }
+    }
+    public interface IRepository
+    {
+        List<string> GetAll();
     }
 }
