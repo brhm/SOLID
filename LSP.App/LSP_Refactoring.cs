@@ -4,8 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LSP.App.Bad
+namespace LSP.App.Good
 {
+
+    public interface ITakePhoto
+    {
+        void TakePhoto();
+    }
+
     // abstract 
     public abstract class BasePhone
     {
@@ -14,21 +20,17 @@ namespace LSP.App.Bad
             Console.WriteLine("Call Phone");
         }
 
-        public abstract void TakePhoto();
     }
 
-    public class IPhone : BasePhone
+    public class IPhone : BasePhone, ITakePhoto
     {
-        public override void TakePhoto()
+        public void TakePhoto()
         {
-            Console.WriteLine("Take photo");
+            Console.WriteLine("Take Photo");
         }
     }
     public class Nokia3310 : BasePhone
     {
-        public override void TakePhoto()
-        {
-            Console.WriteLine("Throw exception. Nokia3310 hasn't now takephoto property");
-        }
+       
     }
 }
