@@ -13,19 +13,8 @@ namespace ISP.App.Good
     /// 
 
     // 1. Read Repository
-    public class ReadRepository : IProductRepository
-    {
-        // Create, DeleteById, Update functions is not necessary here. We have to avoid that.
-        public void Create(Product product)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
+    public class ReadRepository : IReadRepository
+    {       
         public List<Product> GetAll()
         {
             throw new NotImplementedException();
@@ -35,27 +24,43 @@ namespace ISP.App.Good
         {
             throw new NotImplementedException();
         }
+    }
 
-        public void Update(Product product)
+    // 1. Write Repository
+    public class WriteRepository : IWriteRepository
+    {
+        void IWriteRepository.Create(Product product)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IWriteRepository.DeleteById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IWriteRepository.Update(Product product)
         {
             throw new NotImplementedException();
         }
     }
-
     public class Product
     {
         public int Id { get; set; }
         public string Name { get; set; }
     }
 
-    public interface IProductRepository
+    public interface IWriteRepository
+    {
+        void DeleteById(int id);
+        void Update(Product product);
+        void Create(Product product);
+    }
+    public interface IReadRepository
     {
         Product GetById(int id);
         List<Product> GetAll();
 
-        void DeleteById(int id);
-        void Update(Product product);
-        void Create(Product product);
     }
 
 
